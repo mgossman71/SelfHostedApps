@@ -17,7 +17,7 @@ services:
       - "${PORT}:3000"
     restart: unless-stopped
     volumes:
-      - docmost_storage:/app/data/storage
+      - ./docmost_storage:/app/data/storage
     # (Optional) Basic healthcheck uses the built-in endpoint
     healthcheck:
       test: ["CMD", "wget", "-qO-", "http://localhost:3000/api/health"]
@@ -34,14 +34,14 @@ services:
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
     restart: unless-stopped
     volumes:
-      - db_data:/var/lib/postgresql/data
+      - ./db_data:/var/lib/postgresql/data
 
   redis:
     image: redis:7.2-alpine
     restart: unless-stopped
     command: ["redis-server", "--appendonly", "yes"]
     volumes:
-      - redis_data:/data
+      - ./redis_data:/data
 
 volumes:
   docmost_storage:
