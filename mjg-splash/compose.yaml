@@ -1,0 +1,26 @@
+services:
+  homebridge:
+    image: homebridge/homebridge:latest
+    container_name: homebridge
+    network_mode: host
+    restart: unless-stopped
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=America/Chicago
+      - HOMEBRIDGE_CONFIG_UI=1
+      - HOMEBRIDGE_CONFIG_UI_PORT=8581
+    volumes:
+      - ./homebridge:/homebridge
+networks: {}root@px-u-dk-00:/opt/stacks#
+root@px-u-dk-00:/opt/stacks#
+root@px-u-dk-00:/opt/stacks#
+root@px-u-dk-00:/opt/stacks# cat mjg-splash/compose.yaml
+services:
+  mjg-splash:
+    image: mgossman71/mjg-splash
+    build: .
+    ports:
+      - 8090:80
+    restart: unless-stopped
+networks: {}
