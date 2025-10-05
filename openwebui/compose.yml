@@ -1,0 +1,44 @@
+services:
+  open-webui:
+    image: ghcr.io/open-webui/open-webui:latest
+    container_name: open-webui
+    restart: unless-stopped
+    ports:
+      # Change the left side (3000) if you need a different host port
+      - "8080:8080"
+    environment:
+      # === Auth & Signup ===
+      # On first run, create your admin account in the UI, then set this to "false" and redeploy.
+      ENABLE_SIGNUP: "true"
+      # If you already know your base URL (for proxies), set it to help with callbacks/links.
+      # WEBUI_BASE_URL: "https://chat.yourdomain.com"
+
+      # === Connect to your LLM backend (optional) ===
+      # If you're using Ollama or another OpenAI-compatible server, set the base URL:
+      # OLLAMA_BASE_URL: "http://ollama:11434"
+      # Or, for OpenAI-compatible APIs:
+      # OPENAI_API_KEY: "sk-..."
+      # OPENAI_API_BASE_URL: "https://api.your-gateway.tld/v1"
+
+      # === Misc toggles you might like ===
+      # WEBUI_NAME: "Open WebUI"
+      # DEFAULT_LOCALE: "en"
+      # RATE_LIMIT_WINDOW: "1m"
+      # RATE_LIMIT: "120"
+
+    volumes:
+      # App data (users, settings, uploads, etc.)
+      - ./openwebui-data:/app/backend/data
+      # If you want to mount extra models/prompts, add more bind mounts here
+
+    # If you run a reverse proxy and want all apps on one user-defined network, uncomment:
+    # networks:
+    #   - apps
+
+volumes:
+  openwebui-data:
+
+# If you use a shared network with Nginx Proxy Manager / Traefik, define it here:
+# networks:
+#   apps:
+#     external: true
