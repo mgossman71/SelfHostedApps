@@ -1,0 +1,31 @@
+services:
+  n8n:
+    image: n8nio/n8n:stable
+    container_name: n8n
+    restart: unless-stopped
+    ports:
+      - 5678:5678
+    environment:
+      - GENERIC_TIMEZONE=America/Chicago
+      # generate a long random string and keep it the same forever
+      - N8N_ENCRYPTION_KEY=CHANGE_ME_TO_A_LONG_RANDOM_STRING
+      - N8N_LICENSE_ACTIVATION_KEY=3a9e21f8-ff48-4584-9662-5d2779052da1
+      - N8N_PUSH_BACKEND=websocket
+    volumes:
+      - n8n_data:/home/node/.n8n
+volumes:
+  n8n_data: null
+networks: {}
+root@px-u-dk-00:/opt/stacks#
+root@px-u-dk-00:/opt/stacks#
+root@px-u-dk-00:/opt/stacks#
+root@px-u-dk-00:/opt/stacks# cat openspeedtest/compose.yaml
+services:
+  speedtest:
+    restart: unless-stopped
+    container_name: openspeedtest
+    ports:
+      - 3000:3000
+      - 3002:3001
+    image: openspeedtest/latest
+networks: {}
