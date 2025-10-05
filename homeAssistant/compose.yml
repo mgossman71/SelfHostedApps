@@ -1,0 +1,11 @@
+services:
+  homeassistant:
+    container_name: homeassistant
+    image: ghcr.io/home-assistant/home-assistant:stable
+    network_mode: host
+    privileged: true  # Required for full hardware access (e.g., Bluetooth, GPIO)
+    environment:
+      - TZ=America/Chicago
+    volumes:
+      - ./homeassistant:/config
+    restart: unless-stopped
