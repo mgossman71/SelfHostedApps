@@ -1,0 +1,7 @@
+services:
+  frameforge:
+    image: mgossman71/frameforge-site
+    ports:
+      - 3030:3000
+    restart: unless-stopped
+networks: {}
