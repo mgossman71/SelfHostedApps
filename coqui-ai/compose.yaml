@@ -1,0 +1,8 @@
+services:
+  tts:
+    stdin_open: true
+    tty: true
+    ports:
+      - 5002:5002
+    image: ghcr.io/coqui-ai/tts
+networks: {}
