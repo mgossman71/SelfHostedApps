@@ -11,7 +11,7 @@ services:
     environment:
       # --- core ---
       APP_URL: http://localhost:8089        # <-- for first-run; change to https://invoice.theframeforge.com later
-      APP_KEY: base64:K1zXfO1HqkR3Z+q5Q4pTq1qY7G3rZ5c4j9mXq2Q2q1E=
+      APP_KEY: <yourKeyGoesHere>
       APP_ENV: production
       APP_DEBUG: "0"
       IS_DOCKER: "true"                     # <-- add
