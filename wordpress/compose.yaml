@@ -25,10 +25,10 @@ services:
     image: mariadb:latest
     restart: always
     environment:
-      MYSQL_ROOT_PASSWORD: hookin71
+      MYSQL_ROOT_PASSWORD: <yourPassword>
       MYSQL_DATABASE: wordpress
       MYSQL_USER: wpuser
-      MYSQL_PASSWORD: hookin71
+      MYSQL_PASSWORD: <yourPassword>
     volumes:
       - ./db_data:/var/lib/mysql
   wordpress:
