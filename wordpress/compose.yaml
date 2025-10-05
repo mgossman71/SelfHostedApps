@@ -41,7 +41,7 @@ services:
     environment:
       WORDPRESS_DB_HOST: db:3306
       WORDPRESS_DB_USER: wpuser
-      WORDPRESS_DB_PASSWORD: hookin71
+      WORDPRESS_DB_PASSWORD: <password>
       WORDPRESS_DB_NAME: wordpress
       WORDPRESS_DEBUG: 1
 volumes:
