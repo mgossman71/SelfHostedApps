@@ -1,0 +1,83 @@
+services:
+  sabnzbd:
+    container_name: sabnzbd
+    image: linuxserver/sabnzbd
+    volumes:
+      - /sabnzb/config:/config
+      - ./sabnzbd-tmp:/sabnzb/incomplete
+      - type: volume
+        source: sabnzb
+        target: /mnt/sabnzb
+      - type: volume
+        source: Movies
+        target: /mnt/Movies
+    environment:
+      - PUID=0
+      - PGID=0
+    restart: always
+    ports:
+      - 8080:8080
+  sonarr:
+    container_name: sonarr
+    image: linuxserver/sonarr
+    ports:
+      - 8989:8989
+    volumes:
+      - /sonarr/config:/config
+      - type: volume
+        source: TV-Shows
+        target: /mnt/TV-Shows
+      - type: volume
+        source: TV-Shows1
+        target: /mnt/TV-Shows1
+      - type: volume
+        source: sabnzb
+        target: /mnt/sabnzb
+    environment:
+      - PUID=0
+      - PGID=0
+    restart: always
+  radarr:
+    container_name: radarr
+    image: linuxserver/radarr
+    ports:
+      - 7878:7878
+    volumes:
+      - /radarr/config:/config
+      - type: volume
+        source: Movies
+        target: /mnt/Movies
+      - type: volume
+        source: sabnzb
+        target: /mnt/sabnzb
+    environment:
+      - PUID=568
+      - PGID=100
+    restart: always
+volumes:
+  Movies:
+    driver_opts:
+      type: nfs
+      o: addr=10.0.0.241,nolock,soft,rw
+      device: :/volume1/Movies
+  TV-Shows:
+    driver_opts:
+      type: nfs
+      o: addr=10.0.0.241,nolock,soft,rw
+      device: :/volume1/TV-Shows
+  TV-Shows1:
+    driver_opts:
+      type: nfs
+      o: addr=10.0.0.241,nolock,soft,rw
+      device: :/volume1/TV-Shows1
+  sabnzb:
+    driver_opts:
+      type: nfs
+      o: addr=10.0.0.241,nolock,soft,rw
+      device: :/volume1/sabnzb
+  transmission:
+    driver_opts:
+      type: nfs
+      o: addr=10.0.0.241,nolock,soft,rw
+      device: :/volume1/sabnzb/transmission
+networks: {}
