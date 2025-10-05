@@ -1,0 +1,41 @@
+services:
+  smokeping:
+    container_name: smokeping
+    image: lscr.io/linuxserver/smokeping
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=America/Chicago
+    volumes:
+      - /smokeping-config:/config
+      - /smokeping-data:/data
+    restart: always
+    ports:
+      - 8081:80
+volumes:
+  Movies:
+    driver_opts:
+      type: nfs
+      o: addr=10.0.0.241,nolock,soft,rw
+      device: :/volume1/Movies
+  TV-Shows:
+    driver_opts:
+      type: nfs
+      o: addr=10.0.0.241,nolock,soft,rw
+      device: :/volume1/TV-Shows
+  TV-Shows1:
+    driver_opts:
+      type: nfs
+      o: addr=10.0.0.241,nolock,soft,rw
+      device: :/volume1/TV-Shows1
+  sabnzb:
+    driver_opts:
+      type: nfs
+      o: addr=10.0.0.241,nolock,soft,rw
+      device: :/volume1/sabnzb
+  transmission:
+    driver_opts:
+      type: nfs
+      o: addr=10.0.0.241,nolock,soft,rw
+      device: :/volume1/sabnzb/transmission
+networks: {}
