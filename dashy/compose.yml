@@ -1,0 +1,12 @@
+services:
+  dashy:
+    ports:
+      - 8080:8080
+    volumes:
+      - /dashy/conf.yml:/app/user-data/conf.yml
+    container_name: dashy
+    restart: always
+    image: lissy93/dashy:latest
+    environment:
+      - DASHY_PASSWORD
+networks: {}
