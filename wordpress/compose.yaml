@@ -1,0 +1,49 @@
+services:
+  whisparr:
+    container_name: whisparr
+    image: ghcr.io/hotio/whisparr
+    ports:
+      - 6969:6969
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - UMASK=002
+      - TZ=America/Chicago
+    volumes:
+      - ./config:/config
+      - ./data:/data
+networks: {}
+root@px-u-dk-00:/opt/stacks#
+root@px-u-dk-00:/opt/stacks#
+root@px-u-dk-00:/opt/stacks# cat whisparr/.env
+# VARIABLE=value #commentroot@px-u-dk-00:/opt/stacks#
+root@px-u-dk-00:/opt/stacks#
+root@px-u-dk-00:/opt/stacks#
+root@px-u-dk-00:/opt/stacks# cat wordpress/compose.yaml
+services:
+  db:
+    image: mariadb:latest
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: hookin71
+      MYSQL_DATABASE: wordpress
+      MYSQL_USER: wpuser
+      MYSQL_PASSWORD: hookin71
+    volumes:
+      - ./db_data:/var/lib/mysql
+  wordpress:
+    image: wordpress:latest
+    depends_on:
+      - db
+    restart: always
+    ports:
+      - 8000:80
+    environment:
+      WORDPRESS_DB_HOST: db:3306
+      WORDPRESS_DB_USER: wpuser
+      WORDPRESS_DB_PASSWORD: hookin71
+      WORDPRESS_DB_NAME: wordpress
+      WORDPRESS_DEBUG: 1
+volumes:
+  db_data: null
+networks: {}
