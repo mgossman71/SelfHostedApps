@@ -1,0 +1,7 @@
+services:
+  grafana:
+    ports:
+      - 3003:3000
+    container_name: grafana
+    image: grafana/grafana
+    restart: unless-stopped
