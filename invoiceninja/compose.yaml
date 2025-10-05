@@ -1,0 +1,117 @@
+services:
+  app:
+    image: invoiceninja/invoiceninja:5
+    container_name: invoiceninja-app
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_started
+      redis:
+        condition: service_started
+    environment:
+      # --- core ---
+      APP_URL: http://localhost:8089        # <-- for first-run; change to https://invoice.theframeforge.com later
+      APP_KEY: base64:K1zXfO1HqkR3Z+q5Q4pTq1qY7G3rZ5c4j9mXq2Q2q1E=
+      APP_ENV: production
+      APP_DEBUG: "0"
+      IS_DOCKER: "true"                     # <-- add
+      # --- database ---
+      DB_TYPE: mysql
+      DB_HOST: db
+      DB_PORT: "3306"                       # <-- add (explicit)
+      DB_DATABASE: ninjadb
+      DB_USERNAME: ninja
+      DB_PASSWORD: ninja
+      DB_STRICT: "false"
+      # --- queues / cache ---
+      QUEUE_CONNECTION: redis
+      REDIS_HOST: redis
+      REDIS_PORT: "6379"
+      # --- pdf / misc ---
+      PDF_GENERATOR: snappdf
+      TRUSTED_PROXIES: "*"
+      PHP_MEMORY_LIMIT: 512M
+      MAX_EXECUTION_TIME: "300"
+      REQUIRE_HTTPS: "false"
+      SESSION_SECURE_COOKIE: "false"
+      MAIL_MAILER: log
+    volumes:
+      - ninjapublic:/var/www/app/public
+      - ninjastorage:/var/www/app/storage
+
+  web:
+    image: nginx:alpine
+    container_name: invoiceninja-web
+    restart: unless-stopped
+    depends_on:
+      app:
+        condition: service_started
+    ports:
+      - 8089:80
+    volumes:
+      - ninjapublic:/var/www/app/public:ro
+    command:
+      - /bin/sh
+      - -exc
+      - |
+        cat > /tmp/default.tpl <<'CFG'
+        server {
+          listen 80;
+          server_tokens off;
+
+          root /var/www/app/public;
+          index index.php index.html;
+
+          location / {
+            try_files $$uri /index.php?$$query_string;
+          }
+
+          location ~ \.php$ {
+            include fastcgi_params;
+            fastcgi_pass app:9000;
+            fastcgi_param SCRIPT_FILENAME $$document_root$$fastcgi_script_name;
+            fastcgi_param PATH_INFO $$fastcgi_path_info;
+            fastcgi_buffers 16 16k;
+            fastcgi_index index.php;
+          }
+
+          location ~* \.(jpg|jpeg|gif|png|css|js|ico|svg|woff2?)$ {
+            expires max;
+            access_log off;
+            log_not_found off;
+          }
+
+          client_max_body_size 50M;
+        }
+        CFG
+        sed -e 's/\$\$/$/g' /tmp/default.tpl > /etc/nginx/conf.d/default.conf
+        exec nginx -g 'daemon off;'
+
+  db:
+    image: mariadb:10.11
+    container_name: invoiceninja-db
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: change_me_root
+      MYSQL_DATABASE: ninjadb
+      MYSQL_USER: ninja
+      MYSQL_PASSWORD: ninja
+    command:
+      - --character-set-server=utf8mb4
+      - --collation-server=utf8mb4_unicode_ci
+      - --innodb_file_per_table=1
+    volumes:
+      - db:/var/lib/mysql
+
+  redis:
+    image: redis:7-alpine
+    container_name: invoiceninja-redis
+    restart: unless-stopped
+    volumes:
+      - redis:/data
+
+volumes:
+  db: {}
+  redis: {}
+  ninjapublic: {}
+  ninjastorage: {}
