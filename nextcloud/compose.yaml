@@ -1,0 +1,46 @@
+services:
+  db:
+    image: mariadb:11
+    restart: unless-stopped
+    environment:
+      MARIADB_ROOT_PASSWORD: change-root
+      MARIADB_DATABASE: nextcloud
+      MARIADB_USER: nextcloud
+      MARIADB_PASSWORD: change-db
+    command: >
+      --transaction-isolation=READ-COMMITTED --binlog-format=ROW
+      --innodb-file-per-table=1 --character-set-server=utf8mb4
+      --collation-server=utf8mb4_general_ci
+    volumes:
+      - ./db:/var/lib/mysql
+  app:
+    image: nextcloud:29-apache
+    restart: unless-stopped
+    depends_on:
+      - db
+    # Optional local test port (your proxy can also point here)
+    ports:
+      - 8083:80
+    volumes:
+      - ./nextcloud:/var/www/html
+    environment:
+      # Database
+      MYSQL_HOST: db
+      MYSQL_DATABASE: nextcloud
+      MYSQL_USER: nextcloud
+      MYSQL_PASSWORD: change-db
+      # Auto-create admin on first run
+      NEXTCLOUD_ADMIN_USER: admin
+      NEXTCLOUD_ADMIN_PASSWORD: ${ADMIN_PASS}
+      # Reverse proxy
+      NEXTCLOUD_TRUSTED_DOMAINS: next.gossman.cloud 127.0.0.1 10.0.0.55
+      NEXTCLOUD_OVERWRITEHOST: next.gossman.cloud
+      NEXTCLOUD_OVERWRITEPROTOCOL: https
+      TRUSTED_PROXIES: 10.0.0.55/24
+      # If your proxy is NOT dockerized on the same host, use its LAN IP instead:
+      # TRUSTED_PROXIES: "192.168.1.10"
+
+volumes:
+  db: null
+  nextcloud: null
+networks: {}
