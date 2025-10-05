@@ -1,0 +1,50 @@
+services:
+  vaultwarden:
+    image: vaultwarden/server:latest
+    container_name: vaultwarden
+    restart: unless-stopped
+    environment:
+      # Core web server
+      ROCKET_ADDRESS: 0.0.0.0
+      ROCKET_PORT: 8080
+      # WebSocket for live notifications
+      WEBSOCKET_ENABLED: "true"
+      WEBSOCKET_ADDRESS: 0.0.0.0
+      WEBSOCKET_PORT: 3012
+      # Base URL you will use to access Vaultwarden (include https://)
+      DOMAIN: ${VW_DOMAIN}
+      # Security & admin
+      SIGNUPS_ALLOWED: "false" # change to true if you want open signups
+      ADMIN_TOKEN: ${VW_ADMIN_TOKEN} # set in .env (see below)
+      # Logging
+      LOG_LEVEL: info
+      # (Optional) Misc hardening
+      # DISABLE_ICON_DOWNLOAD: "true"
+      # SENDS_ALLOWED: "true"
+
+      # (Optional) SMTP if you want email (password resets, invites, etc.)
+      # SMTP_HOST: smtp.example.com
+      # SMTP_FROM: "vaultwarden@example.com"
+      # SMTP_PORT: 587
+      # SMTP_SECURITY: starttls   # none|starttls|force_tls
+      # SMTP_USERNAME: youruser
+      # SMTP_PASSWORD: yourpass
+      # HELO_NAME: example.com
+
+    volumes:
+      - ./vw-data:/data
+    ports:
+      - 8085:8080 # HTTP app (proxied by NPM)
+      - 3012:3012 # WebSocket notifications (proxied by NPM)
+    healthcheck:
+      test:
+        - CMD
+        - wget
+        - -qO-
+        - https://vw.gossman.cloud/alive
+      interval: 30s
+      timeout: 5s
+      retries: 5
+networks: {}
+
+# Persisted data (SQLite DB, attachments, icons, etc.) will live in ./vw-data
