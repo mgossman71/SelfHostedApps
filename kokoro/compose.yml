@@ -1,0 +1,20 @@
+services:
+  kokoro-fastapi-gpu:
+    image: ghcr.io/remsky/kokoro-fastapi-gpu:v0.2.1
+    container_name: kokoro-fastapi-gpu
+    ports:
+      - "5000:5000"   # change if you want a different port
+    restart: unless-stopped
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
+    environment:
+      - NVIDIA_VISIBLE_DEVICES=all
+      - NVIDIA_DRIVER_CAPABILITIES=compute,utility
+    volumes:
+      - ./data:/app/data   # persistent data storage
+      - ./models:/app/models # model storage (optional)
