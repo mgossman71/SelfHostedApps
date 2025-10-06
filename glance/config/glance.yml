@@ -98,7 +98,14 @@ pages:
   - name: Services
     columns:
       - size: small
-
+        widgets:
+          - type: bookmarks
+            groups:
+              - title: Self-Hosted Apps
+                links:
+                  - title: Bitwarden
+                    url: http://vault.gossman.cloud/
+            
   - name: Dashy
     slug: dashy
     columns:
