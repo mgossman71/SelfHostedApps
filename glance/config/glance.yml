@@ -97,7 +97,7 @@ pages:
   - name: Lab Services
     slug: lab-services
     columns:
-      - size: half 
+      - size: full 
         widgets:
           - type: monitor
             cache: 1m
@@ -105,7 +105,7 @@ pages:
             sites:
               - title: Open-WebUI
                 url: https://jarvis.gossman.cloud/
-      - size: half
+      - size: full
         widgets:
           - type: monitor
             cache: 1m
