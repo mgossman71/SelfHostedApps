@@ -121,7 +121,7 @@ pages:
         widgets:
           - type: monitor
             cache: 1m
-            title: Services2
+            title: Services
             sites:
               - title: Unifi
                 url: http://10.0.0.3
