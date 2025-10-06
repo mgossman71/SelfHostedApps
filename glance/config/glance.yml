@@ -135,8 +135,8 @@ pages:
             cache: 1m
             title: Services2
             sites:
-              - title: Immich
-                url: https://imch.gossman.cloud/auth/login  
+              - title: Overseerr
+                url: https://requests.gossman.cloud/
   - name: Dashy
     slug: Dashy
     columns:
