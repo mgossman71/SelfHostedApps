@@ -97,7 +97,7 @@ pages:
   - name: Lab Services
     slug: lab-services
     columns:
-      - size: small
+      - size: full
 
   - name: Dashy
     slug: dashy
