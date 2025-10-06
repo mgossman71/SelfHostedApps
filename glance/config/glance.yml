@@ -96,6 +96,15 @@ pages:
                     url: https://imch.gossman.cloud/auth/login
                   - title: Home Assistant
   - name: Services
+    columns:
+      - size: full
+        widgets:
+          - type: bookmarks
+            groups:
+              - title: Homelab UIs
+                links:
+                  - title: Github
+                    url:
   - name: Dashy
     slug: dashy
     columns:
