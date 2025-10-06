@@ -1,1 +1,101 @@
+# Theme + global settings
+theme:
+  presets:
+    default:
+      background-color: 0 0 12
+      primary-color: 210 75 55
+      positive-color: 145 60 55
+      negative-color: 0 100 63
+      contrast-multiplier: 1.05
+  use: default
 
+# Built-in auth (backed by Docker secrets defined in compose)
+auth:
+  secret-key: ${secret:glance_secret_key}
+  users:
+    admin:
+      # You can use either a plain password via Docker secret...
+      password: ${secret:admin_password}
+      # ...or a bcrypt hash instead of "password":
+      # password-hash: $2y$10$............................................
+
+pages:
+  - name: Home
+    head-widgets:
+      - type: markets
+        hide-header: true
+        markets:
+          - symbol: NVDA
+            name: NVIDIA
+          - symbol: AMD
+            name: AMD
+          - symbol: BTC-USD
+            name: Bitcoin
+          - symbol: SPY
+            name: S&P 500
+    columns:
+      - size: small
+        widgets:
+          - type: weather
+            location: Minneapolis, Minnesota, United States
+            units: imperial
+            hour-format: 12h
+          - type: calendar
+            # Example public ICS; swap for yours when ready
+            calendars:
+              - url: https://calendar.google.com/calendar/ical/en.usa%23holiday%40group.v.calendar.google.com/public/basic.ics
+            first-day-of-week: sunday
+          - type: releases
+            cache: 1d
+            repositories:
+              - glanceapp/glance
+              - immich-app/immich
+              - anythingllm/anything-llm
+              - syncthing/syncthing
+      - size: full
+        widgets:
+          - type: group
+            widgets:
+              - type: hacker-news
+              - type: lobsters
+          - type: videos
+            channels:
+              - UCR-DXc1voovS8nhAvccRZhg  # Jeff Geerling
+              - UChzLtFnD6yqi3bQnW0rjE5g  # Craft Computing
+              - UCs3F7Z0w6jVD-s9G6x0XOlg  # Level1Techs
+              - UCBJycsmduvYEL83R_U4JriQ  # MKBHD
+          - type: group
+            widgets:
+              - type: reddit
+                subreddit: selfhosted
+                show-thumbnails: true
+              - type: reddit
+                subreddit: homelab
+                show-thumbnails: true
+              - type: rss
+                limit: 12
+                collapse-after: 4
+                cache: 6h
+                feeds:
+                  - url: https://www.proxmox.com/en/news/atom
+                    title: Proxmox News
+                  - url: https://noted.lol/rss/
+                    title: Noted.lol
+                  - url: https://opensource.com/feed
+                    title: Opensource.com
+      - size: small
+        widgets:
+          - type: server-stats   # Stats of the host Glance runs on
+          - type: to-do
+            id: personal
+            title: Quick Tasks
+          - type: bookmarks
+            groups:
+              - title: Homelab UIs
+                links:
+                  - title: Proxmox
+                    url: https://pve1.local/
+                  - title: NPM
+                    url: https://npm.local/
+                  - title: Immich
+                    url: https://immich.local/
