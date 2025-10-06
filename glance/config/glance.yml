@@ -126,6 +126,7 @@ pages:
               - title: Unifi
                 url: https://10.0.0.3
                 check-url: https://10.0.0.3/
+                allow-insecure: true
               - title: immich
                 url: https://imch.gossman.cloud
       - size: small
