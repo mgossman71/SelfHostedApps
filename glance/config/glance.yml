@@ -127,7 +127,6 @@ pages:
                 url: https://imch.gossman.cloud
           - type: monitor
             cache: 1m
-            title: Services2
             sites:
               - title: Immich
                 url: https://imch.gossman.cloud 
