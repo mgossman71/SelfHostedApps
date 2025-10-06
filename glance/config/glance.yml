@@ -123,13 +123,8 @@ pages:
             cache: 1m
             title: Services2
             sites:
-              - title: Unifi
-                url: https://imch.gossman.cloud
-          - type: monitor
-            cache: 1m
-            sites:
               - title: Immich
-                url: https://imch.gossman.cloud 
+                url: https://imch.gossman.cloud
       - size: small
         widgets:
           - type: monitor
