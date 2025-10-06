@@ -105,7 +105,7 @@ pages:
             sites:
               - title: Open-WebUI
                 url: https://jarvis.gossman.cloud/
-      - size: small
+      - size: full
         widgets:
           - type: monitor
             cache: 1m
