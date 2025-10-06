@@ -107,7 +107,7 @@ pages:
             sites:
               - title: Open-WebUI
                 url: https://jarvis.gossman.cloud
-                icon: /assets/jellyfin-logo.png
+                # icon: /assets/jellyfin-logo.png
 
   - name: Dashy
     slug: dashy
