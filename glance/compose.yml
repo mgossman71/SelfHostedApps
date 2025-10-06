@@ -17,8 +17,3 @@ services:
       - ./config:/app/config  # glance.yml lives in ./config
     # command: ["--host", "0.0.0.0", "--port", "8080"]  # defaults are fine
 
-secrets:
-  glance_secret_key:
-    file: ./secrets/secret_key
-  admin_password:
-    file: ./secrets/admin_password
