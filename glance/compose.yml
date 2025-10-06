@@ -10,15 +10,7 @@ services:
       # Optional: set a canonical URL if you’ll access it via a domain
       # - GLANCE_BASE_URL=https://dashboard.your-domain.tld
       # Use Docker secrets in the config for auth (see glance.yml below)
-    secrets:
-      - glance_secret_key
-      - admin_password
     volumes:
       - ./config:/app/config  # glance.yml lives in ./config
     # command: ["--host", "0.0.0.0", "--port", "8080"]  # defaults are fine
 
-secrets:
-  glance_secret_key:
-    file: ./secrets/secret_key
-  admin_password:
-    file: ./secrets/admin_password
