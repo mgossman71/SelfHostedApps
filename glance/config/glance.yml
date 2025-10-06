@@ -129,6 +129,8 @@ pages:
                 allow-insecure: true
               - title: Open-WebUI
                 url: https://jarvis.gossman.cloud/
+              - title: ChatGPT
+                url: https://chat.openai.com/
               - title: immich
                 url: https://imch.gossman.cloud
       - size: small
