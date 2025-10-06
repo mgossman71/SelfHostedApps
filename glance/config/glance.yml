@@ -107,12 +107,12 @@ pages:
                 url: https://jarvis.gossman.cloud/
       - size: small
         widget:
-        - type: monitor
-          cache: 1m
-          title: Services
-          sites:
-            - title: Immich
-              url: https://imch.gossman.cloud/auth/login   
+          - type: monitor
+            cache: 1m
+            title: Services
+            sites:
+              - title: Immich
+                url: https://imch.gossman.cloud/auth/login   
   - name: Dashy
     slug: dashy
     columns:
