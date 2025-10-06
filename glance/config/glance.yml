@@ -98,12 +98,13 @@ pages:
     slug: lab-services
     columns:
       - size: full
-      - type: monitor
-        cache: 1m
-        title: Services
-        sites:
-          - title: Open-WebUI
-            url: https://jarvis.gossman.cloud/
+        widgets:
+          - type: monitor
+            cache: 1m
+            title: Services
+            sites:
+              - title: Open-WebUI
+                url: https://jarvis.gossman.cloud/
   - name: Dashy
     slug: dashy
     columns:
