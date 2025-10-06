@@ -113,6 +113,14 @@ pages:
             sites:
               - title: Immich
                 url: https://imch.gossman.cloud/auth/login   
+      - size: full
+        widgets:
+          - type: monitor
+            cache: 1m
+            title: Services
+            sites:
+              - title: Immich
+                url: https://imch.gossman.cloud/auth/login  
   - name: Dashy
     slug: dashy
     columns:
