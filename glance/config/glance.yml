@@ -94,6 +94,7 @@ pages:
                     url: http://10.0.0.215:81/login
                   - title: Immich
                     url: https://imch.gossman.cloud/auth/login 
+  - name: Lab Services
   - name: Dashy
     slug: dashy
     columns:
