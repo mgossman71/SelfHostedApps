@@ -101,11 +101,11 @@ pages:
                     url: http://10.0.0.215:81/login
                   - title: Immich
                     url: https://imch.gossman.cloud/auth/login
-- name: Dashy
-  slug: dashy
-  columns:
-    - size: full
-      widgets:
-        - type: iframe
-          source: http://home/
-          height: 900   # adjust to taste
+  - name: Dashy
+    slug: dashy
+    columns:
+      - size: full
+        widgets:
+          - type: iframe
+            source: http://home/
+            height: 900   # adjust to taste
