@@ -95,7 +95,6 @@ pages:
                   - title: Immich
                     url: https://imch.gossman.cloud/auth/login
   - name: Services
-    slug: services
     columns:
       - size: full
       - title: Immich
