@@ -131,7 +131,6 @@ pages:
                 url: https://jarvis.gossman.cloud/
               - title: ChatGPT
                 url: https://chat.openai.com/
-                allow-insecure: true
               - title: immich
                 url: https://imch.gossman.cloud
       - size: small
