@@ -97,7 +97,7 @@ pages:
   - name: Lab Services
     slug: lab-services
     columns:
-      - size: full 
+      - size: small 
         widgets:
           - type: monitor
             cache: 1m
@@ -105,7 +105,7 @@ pages:
             sites:
               - title: Open-WebUI
                 url: https://jarvis.gossman.cloud/
-      - size: full
+      - size: small
         widgets:
           - type: monitor
             cache: 1m
@@ -113,7 +113,7 @@ pages:
             sites:
               - title: Immich
                 url: https://imch.gossman.cloud/auth/login   
-      - size: full
+      - size: small
         widgets:
           - type: monitor
             cache: 1m
