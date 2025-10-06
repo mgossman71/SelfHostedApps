@@ -9,7 +9,7 @@ theme:
       contrast-multiplier: 1.05
   use: default
 pages:
-  - name: Home
+  - name: Glance
     head-widgets:
       - type: markets
         hide-header: true
