@@ -103,8 +103,8 @@ pages:
             cache: 1m
             title: Services
             sites:
-              - title: Jellyfin
-                url: https://jellyfin.yourdomain.com
+              - title: Open-WebUI
+                url: https://jarvis.gossman.cloud
                 icon: /assets/jellyfin-logo.png
               - title: Gitea
                 url: https://gitea.yourdomain.com
