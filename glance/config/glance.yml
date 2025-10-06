@@ -82,6 +82,8 @@ pages:
             groups:
               - title: Homelab UIs
                 links:
+                  - title: Unifi
+                    url: http://10.0.0.3
                   - title: Open-WebUI
                     url:  https://jarvis.gossman.cloud/
                   - title: Proxmox
