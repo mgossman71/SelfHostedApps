@@ -137,6 +137,12 @@ pages:
             sites:
               - title: Overseerr
                 url: https://requests.gossman.cloud/
+              - title: Radarr
+                url: https://radarr.gossman.cloud/
+              - title: Sonarr
+                url: https://sonarr.gossman.cloud/
+              - title: Sabnzbd
+                url: https://sabnzbd.gossman.cloud/
   - name: Dashy
     slug: Dashy
     columns:
