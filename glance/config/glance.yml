@@ -127,5 +127,5 @@ pages:
       - size: full
         widgets:
           - type: iframe
-            source: http://10.0.0.104:8080/
+            source: http://10.0.0.239:8080/
             height: 900   # adjust to taste
