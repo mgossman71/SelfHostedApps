@@ -82,6 +82,8 @@ pages:
             groups:
               - title: Homelab UIs
                 links:
+                  - title: Github
+                    url: https://github.com/mgossman71?tab=repositories
                   - title: Unifi
                     url: http://10.0.0.3
                   - title: Open-WebUI
