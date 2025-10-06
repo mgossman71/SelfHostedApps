@@ -100,12 +100,6 @@ pages:
     columns:
       - size: full 
         widgets:
-          - type: monitor
-            cache: 1m
-            title: Services1
-            sites:
-              - title: Open-WebUI
-                url: https://jarvis.gossman.cloud/
           - type: custom-api
             title: Steam Specials
             cache: 12h
