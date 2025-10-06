@@ -8,17 +8,6 @@ theme:
       negative-color: 0 100 63
       contrast-multiplier: 1.05
   use: default
-
-# Built-in auth (backed by Docker secrets defined in compose)
-auth:
-  secret-key: ${secret:glance_secret_key}
-  users:
-    admin:
-      # You can use either a plain password via Docker secret...
-      password: ${secret:admin_password}
-      # ...or a bcrypt hash instead of "password":
-      # password-hash: $2y$10$............................................
-
 pages:
   - name: Home
     head-widgets:
