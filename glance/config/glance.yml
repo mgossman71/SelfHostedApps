@@ -101,7 +101,7 @@ pages:
         widgets:
           - type: monitor
             cache: 1m
-            title: Services
+            title: Services1
             sites:
               - title: Open-WebUI
                 url: https://jarvis.gossman.cloud/
@@ -109,7 +109,7 @@ pages:
         widgets:
           - type: monitor
             cache: 1m
-            title: Services
+            title: Services2
             sites:
               - title: Immich
                 url: https://imch.gossman.cloud 
@@ -117,7 +117,7 @@ pages:
         widgets:
           - type: monitor
             cache: 1m
-            title: Services
+            title: Services3
             sites:
               - title: Immich
                 url: https://imch.gossman.cloud/auth/login  
