@@ -10,6 +10,7 @@ theme:
   use: default
 pages:
   - name: Glance
+    slug: glance
     head-widgets:
       - type: markets
         hide-header: true
@@ -139,7 +140,7 @@ pages:
               - title: Immich
                 url: https://imch.gossman.cloud/auth/login  
   - name: Dashy
-    slug: dashy
+    slug: Dashy
     columns:
       - size: full
         widgets:
