@@ -98,16 +98,7 @@ pages:
 
 
   - name: Services
-    columns:
-      - size: small
-        widgets:
-          - type: monitor
-            cache: 1m
-            title: Services
-            sites:
-              - title: Open-WebUI
-                url: https://jarvis.gossman.cloud
-                # icon: /assets/jellyfin-logo.png
+
 
   - name: Dashy
     slug: dashy
