@@ -132,6 +132,8 @@ pages:
               - title: ChatGPT
                 url: https://chat.openai.com/
                 alt-status-codes: [403]
+              - title: Home Assistant
+                url: http://10.0.0.239:8123/
               - title: immich
                 url: https://imch.gossman.cloud
       - size: small
