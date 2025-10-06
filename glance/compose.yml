@@ -1,5 +1,3 @@
-version: "3.8"
-
 services:
   glance:
     image: glanceapp/glance:latest
