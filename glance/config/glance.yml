@@ -112,7 +112,7 @@ pages:
             title: Services
             sites:
               - title: Immich
-                url: https://imch.gossman.cloud/auth/login   
+                url: https://imch.gossman.cloud 
       - size: small
         widgets:
           - type: monitor
