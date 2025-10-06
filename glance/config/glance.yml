@@ -94,8 +94,8 @@ pages:
               - title: Homelab UIs
                 links:
                   - title: Proxmox
-                    url: https://pve1.local/
+                    url: http://pve1:8006
                   - title: NPM
-                    url: https://npm.local/
+                    url: http://10.0.0.215:81/login
                   - title: Immich
-                    url: https://immich.local/
+                    url: https://imch.gossman.cloud/auth/login
