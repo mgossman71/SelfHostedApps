@@ -97,7 +97,7 @@ pages:
   - name: Lab Services
     slug: lab-services
     columns:
-      - size: full
+      - size: small
         widgets:
           - type: monitor
             cache: 1m
