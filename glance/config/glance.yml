@@ -113,6 +113,14 @@ pages:
             sites:
               - title: Immich
                 url: https://imch.gossman.cloud 
+      - size: full
+        widgets:
+          - type: monitor
+            cache: 1m
+            title: Services
+            sites:
+              - title: Immich
+                url: https://imch.gossman.cloud 
       - size: small
         widgets:
           - type: monitor
