@@ -93,6 +93,8 @@ pages:
             groups:
               - title: Homelab UIs
                 links:
+                  - title: Open-WebUI
+                    url:  https://jarvis.gossman.cloud/
                   - title: Proxmox
                     url: http://pve1:8006
                   - title: NPM
