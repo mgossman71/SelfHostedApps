@@ -127,6 +127,8 @@ pages:
                 url: https://10.0.0.3
                 check-url: https://10.0.0.3/
                 allow-insecure: true
+              - title: Open-WebUI
+                url: https://jarvis.gossman.cloud/
               - title: immich
                 url: https://imch.gossman.cloud
       - size: small
