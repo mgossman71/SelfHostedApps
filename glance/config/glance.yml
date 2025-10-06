@@ -94,6 +94,14 @@ pages:
                     url: http://10.0.0.215:81/login
                   - title: Immich
                     url: https://imch.gossman.cloud/auth/login
+  - name: Services
+    slug: services
+    columns:
+      - size: full
+      - title: Immich
+        url: https://immich.yourdomain.com
+        icon: /assets/immich-logo.png
+
   - name: Dashy
     slug: dashy
     columns:
