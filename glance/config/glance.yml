@@ -133,7 +133,7 @@ pages:
         widgets:
           - type: monitor
             cache: 1m
-            title: Services2
+            title: Movie-Tools
             sites:
               - title: Overseerr
                 url: https://requests.gossman.cloud/
