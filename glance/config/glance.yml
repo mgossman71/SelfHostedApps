@@ -94,6 +94,8 @@ pages:
                     url: http://10.0.0.215:81/login
                   - title: Immich
                     url: https://imch.gossman.cloud/auth/login
+                  - title: Home Assistant
+  - name: Services
   - name: Dashy
     slug: dashy
     columns:
