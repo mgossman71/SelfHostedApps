@@ -95,6 +95,10 @@ pages:
                   - title: Immich
                     url: https://imch.gossman.cloud/auth/login 
   - name: Lab Services
+    slug: lab-services
+    columns:
+      - size: full
+
   - name: Dashy
     slug: dashy
     columns:
