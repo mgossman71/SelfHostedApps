@@ -93,18 +93,7 @@ pages:
                   - title: NPM
                     url: http://10.0.0.215:81/login
                   - title: Immich
-                    url: https://imch.gossman.cloud/auth/login
-  - name: Services
-    columns:
-      - size: small
-        widgets:
-          - type: bookmarks
-            groups:
-              - title: Self-Hosted Apps
-                links:
-                  - title: Bitwarden
-                    url: http://vault.gossman.cloud/
-            
+                    url: https://imch.gossman.cloud/auth/login 
   - name: Dashy
     slug: dashy
     columns:
