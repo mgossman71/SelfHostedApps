@@ -95,6 +95,8 @@ pages:
                   - title: Immich
                     url: https://imch.gossman.cloud/auth/login
                   - title: Home Assistant
+
+
   - name: Services
     columns:
       - size: small
@@ -106,18 +108,7 @@ pages:
               - title: Open-WebUI
                 url: https://jarvis.gossman.cloud
                 icon: /assets/jellyfin-logo.png
-              - title: Gitea
-                url: https://gitea.yourdomain.com
-                icon: /assets/gitea-logo.png
-              - title: Immich
-                url: https://immich.yourdomain.com
-                icon: /assets/immich-logo.png
-              - title: AdGuard Home
-                url: https://adguard.yourdomain.com
-                icon: /assets/adguard-logo.png
-              - title: Vaultwarden
-                url: https://vault.yourdomain.com
-                icon: /assets/vaultwarden-logo.png
+
   - name: Dashy
     slug: dashy
     columns:
