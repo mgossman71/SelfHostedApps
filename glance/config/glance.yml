@@ -124,13 +124,13 @@ pages:
             title: Infrastructure
             sites:
               - title: PVE1
-                url: https://www.google.com
+                url: https://pve1:8006/
               - title: PVE2
-                url: https://www.cloudflare.com
+                url: https://pve2:8006/
               - title: PVE3
-                url: https://www.opendns.com
+                url: https://pve3:8006/
               - title: Proxmox Backup Server
-                url: https://www.quad9.net
+                url: https://10.0.0.19:8007/
           - type: monitor
             cache: 1m
             title: Services
