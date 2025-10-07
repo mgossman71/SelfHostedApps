@@ -126,6 +126,7 @@ pages:
               - title: PVE1
                 url: https://pve1:8006/
                 allow-insecure: true
+                alt-status-codes: [401, 403]
               - title: PVE2
                 url: https://pve2:8006/
                 allow-insecure: true
