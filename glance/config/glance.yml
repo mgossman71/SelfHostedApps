@@ -52,10 +52,6 @@ pages:
               - type: lobsters
           - type: videos
             channels:
-              # - UCR-DXc1voovS8nhAvccRZhg  # Jeff Geerling
-              # - UChzLtFnD6yqi3bQnW0rjE5g  # Craft Computing
-              # - UCs3F7Z0w6jVD-s9G6x0XOlg  # Level1Techs
-              # - UCBJycsmduvYEL83R_U4JriQ  # MKBHD
               - UCiaQzXI5528Il6r2NNkrkJA  # Digital Spaceport
               - UCkWQ0gDrqOCarmUKmppD7GQ  # JayzTwoCents
               - UCajiMK_CY9icRhLepS8_3ug  # Alex Ziskind
