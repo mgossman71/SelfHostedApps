@@ -127,15 +127,17 @@ pages:
             title: Infrastructure
             sites:
               - title: PVE1
-                url: https://pve1:8006/
+                url: https://pve1:8006
                 allow-insecure: true
                 alt-status-codes: [200, 401, 403]
               - title: PVE2
-                url: https://pve2:8006/
+                url: https://pve2:8006
                 allow-insecure: true
+                alt-status-codes: [200, 401, 403]
               - title: PVE3
-                url: https://pve3:8006/
+                url: https://pve3:8006
                 allow-insecure: true
+                alt-status-codes: [200, 401, 403]
               - title: Proxmox Backup Server
                 url: https://10.0.0.19:8007/
                 allow-insecure: true
