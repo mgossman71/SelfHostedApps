@@ -19,6 +19,8 @@ pages:
             name: NVIDIA
           - symbol: AMD
             name: AMD
+          - symbol: TGT
+            name: Target Corp
           - symbol: BTC-USD
             name: Bitcoin
           - symbol: SPY
