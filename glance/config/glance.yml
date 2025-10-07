@@ -125,8 +125,8 @@ pages:
             sites:
               - title: PVE1
                 url: https://pve1:8006/
+                check-url: https://pve1:8006/api2/json/version
                 allow-insecure: true
-                alt-status-codes: [403]
               - title: PVE2
                 url: https://pve2:8006/
                 allow-insecure: true
