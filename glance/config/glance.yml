@@ -125,13 +125,16 @@ pages:
             sites:
               - title: PVE1
                 url: https://pve1:8006/
+                allow-insecure: true
               - title: PVE2
                 url: https://pve2:8006/
+                allow-insecure: true
               - title: PVE3
                 url: https://pve3:8006/
+                allow-insecure: true
               - title: Proxmox Backup Server
                 url: https://10.0.0.19:8007/
-          - type: monitor
+                allow-insecure: true
             cache: 1m
             title: Services
             sites:
