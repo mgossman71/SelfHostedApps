@@ -147,6 +147,8 @@ pages:
                 url: https://10.0.0.3
                 check-url: https://10.0.0.3/
                 allow-insecure: true
+              - title: NPM
+                url: http://10.0.0.215:81/
               - title: Open-WebUI
                 url: https://jarvis.gossman.cloud/
               - title: ChatGPT
