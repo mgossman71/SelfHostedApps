@@ -118,29 +118,6 @@ pages:
                 </li>
               {{ end }}
               </ul>     
-          - type: custom-api
-            title: Steam Deals — Under $10 (60%+)
-            cache: 6h
-            url: "https://store.steampowered.com/search/results/?json=1&specials=1&category1=998&maxprice=1000&l=en&cc=us&hide_f2p=1&sort_by=Price_ASC"
-            template: |
-              <ul class="list list-gap-10 collapsible-container" data-collapse-after="8">
-              {{ range .JSON.Array "items" }}
-                {{ $price := .Map "price" }}
-                {{ $initial := $price.Int "initial" }}
-                {{ $final := $price.Int "final" }}
-                {{ $discount := cond (and $price (gt $initial 0)) (mul (div (sub $initial $final) $initial) 100) 0 }}
-                {{ if and (le $final 1000) (ge $discount 60) }}
-                <li>
-                  <a class="size-h4 color-highlight block text-truncate" href="https://store.steampowered.com/app/{{ .Int "id" }}/">{{ .String "name" }}</a>
-                  <ul class="list-horizontal-text">
-                    <li>{{ printf "$%.2f" (div (toFloat $final) 100) }}</li>
-                    <li class="color-positive">{{ printf "%d%% off" (round $discount) }}</li>
-                  </ul>
-                </li>
-                {{ end }}
-              {{ end }}
-              </ul>
-
 
       - size: small
         widgets:
