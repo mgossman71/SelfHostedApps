@@ -141,36 +141,6 @@ pages:
               {{ end }}
               </ul>
 
-          - type: custom-api
-            title: Steam Daily Deal + Spotlight
-            cache: 3h
-            url: "https://store.steampowered.com/api/featuredcategories?cc=us&l=en"
-            template: |
-              {{ $daily := .JSON.Map "specials" }}
-              {{ $spot := .JSON.Map "cat_spotlight" }}
-              <div class="stack stack-gap-8">
-                {{ if $daily }}
-                  <div>
-                    <div class="size-h4">Daily Deal</div>
-                    <ul class="list list-gap-8">
-                    {{ range $daily.Array "items" | limit 1 }}
-                      <li>
-                        <a class="block size-h4 color-highlight" href="https://store.steampowered.com/app/{{ .Int "id" }}/">{{ .String "name" }}</a>
-                        <div>{{ printf "$%.2f" (div (toFloat (.Int "final_price")) 100) }} · {{ .Int "discount_percent" }}% off</div>
-                      </li>
-                    {{ end }}
-                    </ul>
-                  </div>
-                {{ end }}
-                {{ if $spot }}
-                  <div>
-                    <div class="size-h4">Spotlight</div>
-                    <a class="block color-highlight" href="{{ $spot.String "url" }}">{{ $spot.String "name" }}</a>
-                  </div>
-                {{ end }}
-              </div>
-
-
 
       - size: small
         widgets:
