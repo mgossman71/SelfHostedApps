@@ -103,7 +103,7 @@ pages:
         widgets:
           - type: custom-api
             title: Steam Specials
-            cache: 12h
+            cache: 3h
             url: https://store.steampowered.com/api/featuredcategories?cc=us
             template: |
               <ul class="list list-gap-10 collapsible-container" data-collapse-after="5">
