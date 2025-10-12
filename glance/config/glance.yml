@@ -197,7 +197,7 @@ pages:
             groups:
               - title: "Targets"
                 links:
-                  - title: "microcenter"
+                  - title: "Microcenter"
                     url: https://www.microcenter.com/
                   - title: "Corsair VENGEANCE 64GB (2 x 32GB) DDR5-6000 PC5-48000 CL30    (target <$235)"
                     url: https://www.microcenter.com/product/689368/VENGEANCE_64GB_(2_x_32GB)_DDR5-6000_PC5-48000_CL30_Dual_Channel_Desktop_Memory_Kit_CMK64GX5M2B6000Z30_-_Black
