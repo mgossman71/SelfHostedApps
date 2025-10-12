@@ -187,11 +187,57 @@ pages:
           - type: iframe
             source: http://10.0.0.104:8080/
             height: 900   # adjust to taste
+
+  # Append this page block to your existing `pages:` array in `glance.yml`
+  # (Keep total columns per page ≤ 3.)
+
   - name: Shopping
     slug: shopping
+    head-widgets: []
     columns:
-      - size: full
+      - size: large
         widgets:
-          - type: iframe
-            source: http://10.0.0.104:8080/
-            height: 900   # adjust to taste
+          # Simple, reliable way to store clickable items with notes & targets
+          - type: markdown
+            title: "🛒 Watchlist"
+            content: |
+              ### PC Parts
+              - [Samsung 990 Pro 2TB](https://example.com/product/990-pro-2tb) — target **<$130**
+              - [Corsair RM1000x Shift PSU](https://example.com/product/rm1000x-shift) — target **<$160**
+              - [Noctua NF-A12x25 PWM](https://example.com/product/nf-a12x25) — target **<$25**
+
+              ### Bikes / Gear
+              - [Fox V1 Helmet](https://example.com/product/fox-v1) — target **<$110**
+              - [Pirelli MT60 RS (120/70‑17)](https://example.com/product/mt60) — target **<$95**
+
+              ### Misc
+              - [Anker USB‑C 140W GaN](https://example.com/product/anker-140w) — target **<$78**
+              - [Knipex 5" Cobra pliers](https://example.com/product/knipex-125) — target **<$27**
+
+          # Optional: a second list to track decisions or recently changed prices
+          - type: markdown
+            title: "📉 Price Drops / Decisions"
+            content: |
+              - 2025‑10‑10 — **990 Pro 2TB** hit $129. Add to cart next time it drops.
+              - 2025‑10‑08 — **RM1000x Shift** $169 → **watch** for $10 less.
+
+      # Optional second column with price‑watch feeds (e.g., CamelCamelCamel)
+      - size: small
+        widgets:
+          # If you create Amazon price watches on CamelCamelCamel, each watch has an RSS feed.
+          # Add those feed URLs below to see live updates in your dashboard.
+          - type: rss
+            title: "Amazon Price Watch (CamelCamelCamel)"
+            feeds:
+              - https://example.com/camel/rss/watch-1
+              - https://example.com/camel/rss/watch-2
+            limit: 10
+            show-descriptions: false
+
+          # You can also keep quick shortcuts here
+          - type: markdown
+            title: "Shortcuts"
+            content: |
+              - [CamelCamelCamel Dashboard](https://camelcamelcamel.com/)
+              - [Keepa (requires API)](https://keepa.com/)
+              - [PCPartPicker Saved Lists](https://pcpartpicker.com/user/)
