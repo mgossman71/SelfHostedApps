@@ -188,6 +188,7 @@ pages:
             source: http://10.0.0.104:8080/
             height: 900   # adjust to taste
 
+
   - name: Shopping
     slug: shopping
     columns:
@@ -230,13 +231,14 @@ pages:
           - type: to-do
             id: shopping-notes
             title: "📉 Price Drops / Decisions"
-            # Use this list for quick notes like “990 Pro hit $129 on 2025-10-10”
+            # Use this for quick notes like “990 Pro hit $129 on 2025-10-10”
 
           - type: rss
             title: "Amazon Price Watch (CamelCamelCamel)"
             limit: 10
             show-descriptions: false
             feeds:
-              # Replace with your actual CamelCamelCamel watch RSS URLs
-              - https://example.com/camel/rss/watch-1
-              - https://example.com/camel/rss/watch-2
+              - url: https://example.com/camel/rss/watch-1
+                title: Camel Watch 1
+              - url: https://example.com/camel/rss/watch-2
+                title: Camel Watch 2
