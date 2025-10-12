@@ -192,7 +192,7 @@ pages:
   - name: Shopping
     slug: shopping
     columns:
-      - size: large
+      - size: small
         widgets:
           - type: bookmarks
             title: "🛒 Watchlist — PC Parts"
@@ -231,7 +231,6 @@ pages:
           - type: to-do
             id: shopping-notes
             title: "📉 Price Drops / Decisions"
-            # Use this for quick notes like “990 Pro hit $129 on 2025-10-10”
 
           - type: rss
             title: "Amazon Price Watch (CamelCamelCamel)"
