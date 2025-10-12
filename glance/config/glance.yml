@@ -187,7 +187,6 @@ pages:
           - type: iframe
             source: http://10.0.0.104:8080/
             height: 900   # adjust to taste
-
   - name: Shopping
     slug: shopping
     columns:
@@ -217,18 +216,5 @@ pages:
                   - title: "Anker USB-C 140W GaN  (target <$78)"
                     url: https://example.com/product/anker-140w
 
-          - type: to-do
-            id: shopping-notes
-            title: "📉 Price Drops / Decisions"
-
-          - type: rss
-            title: "Amazon Price Watch (CamelCamelCamel)"
-            limit: 10
-            show-descriptions: false
-            feeds:
-              - url: https://example.com/camel/rss/watch-1
-                title: Camel Watch 1
-              - url: https://example.com/camel/rss/watch-2
-                title: Camel Watch 2
 
     
