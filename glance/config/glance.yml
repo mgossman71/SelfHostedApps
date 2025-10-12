@@ -188,11 +188,10 @@ pages:
             source: http://10.0.0.104:8080/
             height: 900   # adjust to taste
 
-
   - name: Shopping
     slug: shopping
     columns:
-      - size: small
+      - size: full
         widgets:
           - type: bookmarks
             title: "🛒 Watchlist — PC Parts"
@@ -226,8 +225,6 @@ pages:
                   - title: "Knipex 5\" Cobra Pliers  (target <$27)"
                     url: https://example.com/product/knipex-125
 
-      - size: small
-        widgets:
           - type: to-do
             id: shopping-notes
             title: "📉 Price Drops / Decisions"
@@ -241,3 +238,5 @@ pages:
                 title: Camel Watch 1
               - url: https://example.com/camel/rss/watch-2
                 title: Camel Watch 2
+
+    
