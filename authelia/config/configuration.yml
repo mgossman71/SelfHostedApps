@@ -92,7 +92,7 @@ regulation:
 
 storage:
   local:
-    path: ./config/db.sqlite3 #this is your databse. You could use a mysql database if you wanted, but we're going to use this one.
+    path: ./data/db.sqlite3 #this is your databse. You could use a mysql database if you wanted, but we're going to use this one.
   encryption_key: ed428480d7b22d87a4fa540461263d6ab8e2495439672cbb316a40e7a55966d3  #you_must_generate_a_random_string_of_more_than_twenty_chars_and_configure_this #added Dec 5 2021
   
 notifier:
