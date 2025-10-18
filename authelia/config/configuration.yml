@@ -56,8 +56,8 @@ access_control:
       policy: one_factor
     - domain: "sub2.gossman.cloud" #example subdomain to protect
       policy: one_factor
-    - domain: "*.yourdomain.com" #example to protect all subdomains under top-level domain
-      policy: one_factor
+    # - domain: "*.yourdomain.com" #example to protect all subdomains under top-level domain
+    #   policy: one_factor
       #add or remove additional subdomains as necessary. currenlty only supports ONE top-level domain
       #any time you add a new subdomain, you will need to restart the Authelia container to recognize the new settings/rules
 
@@ -71,7 +71,7 @@ access_control:
 
 session:
   name: authelia_session
-  domain: mydoamin.de
+  domain: gossman.cloud
   same_site: lax
   secret: itsmysecret
   expiration: 1h
@@ -92,8 +92,8 @@ regulation:
 
 storage:
   local:
-    path: /config/db.sqlite3 #this is your databse. You could use a mysql database if you wanted, but we're going to use this one.
-  encryption_key: you_must_generate_a_random_string_of_more_than_twenty_chars_and_configure_this #added Dec 5 2021
+    path: ./config/db.sqlite3 #this is your databse. You could use a mysql database if you wanted, but we're going to use this one.
+  encryption_key: ed428480d7b22d87a4fa540461263d6ab8e2495439672cbb316a40e7a55966d3  #you_must_generate_a_random_string_of_more_than_twenty_chars_and_configure_this #added Dec 5 2021
   
 notifier:
   disable_startup_check: true #true/false
