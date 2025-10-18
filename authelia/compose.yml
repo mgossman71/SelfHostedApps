@@ -1,0 +1,10 @@
+services:
+  authelia:
+    image: authelia/authelia
+    container_name: authelia
+    volumes:
+      - ./config:/config 
+    ports:
+      - 9091:9091
+    environment:
+      - TZ=America/Chicago
