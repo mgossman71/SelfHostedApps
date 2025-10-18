@@ -1,0 +1,16 @@
+users:
+  user1: #username for user 1. change to whatever you'd like
+    displayname: "User Name 1" #whatever you want the display name to be
+    password: "$argon2i$v=19$m=1024,t=1,p=8$eTQ3MXdqOGFiaDZoMUtMVw$OeHWQSg9zGKslOepe5t4D1T9BZJjHA1Z+doxZrZYDgI" #generated at https://argon2.online/
+    email: youremail@gmail.com #whatever your email address is
+    groups: #enter the groups you want the user to be part of below
+      - admins
+      - dev
+  user2: #username for user 2. change to whatever you'd like. Or delete this section if you only have 1 user
+    displayname: "User Name 2" #whatever you want the display name to be
+    password: "$argon2i$v=19$m=1024,t=1,p=8$eTQ3MXdqOGFiaDZoMUtMVw$OeHWQSg9zGKslOepe5t4D1T9BZJjHA1Z+doxZrZYDgI" #generated at https://argon2.online/
+    email: youremail2@gmail.com #whatever your email address is
+    groups: #enter the groups you want the user to be part of below
+      - dev
+
+	#any time you add a new user, you will need to restart the Authelia container to recognize the new settings/rules
