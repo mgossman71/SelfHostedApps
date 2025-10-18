@@ -6,16 +6,11 @@
 
 theme: dark
 
-# Use the newer location for the JWT secret used by password resets.
 identity_validation:
   reset_password:
     jwt_secret: 9a1099c6d968fa1ef2b2f94be3018f2be0f068c7696dc9df19c1eb4d555c781b
 
-# Keep redirects within your cookie scope to avoid warnings.
-default_redirection_url: https://auth.gossman.cloud/
-
 server:
-  # Replace deprecated host/port/path with address + endpoints/buffers.
   address: tcp://0.0.0.0:9091/
   endpoints:
     enable_pprof: false
@@ -37,7 +32,6 @@ totp:
   skew: 1
 
 authentication_backend:
-  # Replaces authentication_backend.disable_reset_password
   password_reset:
     disable: false
   refresh_interval: 5m
@@ -75,16 +69,16 @@ session:
   inactivity: 5m
   remember_me: true
 
-  # New multi-domain cookie configuration replaces the deprecated single 'domain' option.
+  # Multi-domain cookie config. Each entry needs authelia_url and default_redirection_url.
   cookies:
     - domain: gossman.cloud
-      # Optional per-cookie override; global default_redirection_url already matches scope.
+      authelia_url: https://auth.gossman.cloud/
       default_redirection_url: https://auth.gossman.cloud/
 
   redis:
     host: authelia-redis
     port: 6379
-    password: itsmysecret        # must match REDIS_PASSWORD in your .env
+    password: itsmysecret
     database_index: 0
     maximum_active_connections: 10
     minimum_idle_connections: 0
@@ -96,14 +90,12 @@ regulation:
 
 storage:
   local:
-    # Inside the container; bind-mount host ./data -> /config/data in docker-compose.
     path: /config/data/db.sqlite3
   encryption_key: ed428480d7b22d87a4fa540461263d6ab8e2495439672cbb316a40e7a55966d3
 
 notifier:
   disable_startup_check: true
   smtp:
-    # New consolidated address key replaces host/port.
     address: submission://smtp.gmail.com:587
     username: youremail@gmail.com
     password: Y0uRp@55W0rD!
@@ -116,4 +108,3 @@ notifier:
     tls:
       skip_verify: false
       minimum_version: TLS1.2
-...
