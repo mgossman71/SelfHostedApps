@@ -1,10 +1,39 @@
 services:
-  authelia:
-    image: authelia/authelia
-    container_name: authelia
+  redis:
+    image: redis:7-alpine
+    container_name: authelia-redis
+    command: ["redis-server", "--appendonly", "yes", "--requirepass", "${REDIS_PASSWORD}"]
     volumes:
-      - ./config:/config 
+      - ./data/redis:/data
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "redis-cli", "-a", "${REDIS_PASSWORD}", "PING"]
+      interval: 10s
+      timeout: 3s
+      retries: 5
+    networks:
+      - authelia
+
+  authelia:
+    image: authelia/authelia:4.39.13
+    container_name: authelia
+    depends_on:
+      redis:
+        condition: service_healthy
+    volumes:
+      - ./config:/config
     ports:
-      - 9091:9091
+      - "9091:9091"
     environment:
       - TZ=America/Chicago
+      # Optional: only if you plan to configure Redis via env instead of configuration.yml
+      # - AUTHELIA_SESSION_PROVIDER=redis
+      # - AUTHELIA_SESSION_REDIS_ADDRESS=tcp://redis:6379
+      # - AUTHELIA_SESSION_REDIS_PASSWORD=${REDIS_PASSWORD}
+    restart: unless-stopped
+    networks:
+      - authelia
+
+networks:
+  authelia:
+    name: authelia
