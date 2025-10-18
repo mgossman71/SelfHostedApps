@@ -6,11 +6,16 @@
 
 theme: dark
 
+# New location for the JWT secret used by password resets.
 identity_validation:
   reset_password:
     jwt_secret: 9a1099c6d968fa1ef2b2f94be3018f2be0f068c7696dc9df19c1eb4d555c781b
 
+# NOTE: Do NOT set a global default_redirection_url when using session.cookies.
+# Configure it per-cookie below.
+
 server:
+  # Replaces deprecated host/port/path with address + endpoints/buffers.
   address: tcp://0.0.0.0:9091/
   endpoints:
     enable_pprof: false
@@ -32,6 +37,7 @@ totp:
   skew: 1
 
 authentication_backend:
+  # Replaces authentication_backend.disable_reset_password
   password_reset:
     disable: false
   refresh_interval: 5m
@@ -48,10 +54,12 @@ authentication_backend:
 access_control:
   default_policy: deny
   rules:
+    # Allow direct access to the Authelia portal itself
     - domain:
         - "auth.gossman.cloud"
       policy: bypass
 
+    # Protect your apps
     - domain: "jarvis.gossman.cloud"
       policy: one_factor
 
@@ -69,16 +77,17 @@ session:
   inactivity: 5m
   remember_me: true
 
-  # Multi-domain cookie config. Each entry needs authelia_url and default_redirection_url.
+  # New multi-domain cookie configuration. Each cookie must specify both
+  # authelia_url and a default_redirection_url that is DIFFERENT from authelia_url.
   cookies:
     - domain: gossman.cloud
       authelia_url: https://auth.gossman.cloud/
-      default_redirection_url: https://auth.gossman.cloud/
+      default_redirection_url: https://jarvis.gossman.cloud/
 
   redis:
     host: authelia-redis
     port: 6379
-    password: itsmysecret
+    password: itsmysecret         # must match REDIS_PASSWORD from your .env
     database_index: 0
     maximum_active_connections: 10
     minimum_idle_connections: 0
@@ -90,12 +99,14 @@ regulation:
 
 storage:
   local:
+    # Inside the container; your compose binds ./data -> /config/data
     path: /config/data/db.sqlite3
   encryption_key: ed428480d7b22d87a4fa540461263d6ab8e2495439672cbb316a40e7a55966d3
 
 notifier:
   disable_startup_check: true
   smtp:
+    # Consolidated key replacing host/port
     address: submission://smtp.gmail.com:587
     username: youremail@gmail.com
     password: Y0uRp@55W0rD!
@@ -108,3 +119,4 @@ notifier:
     tls:
       skip_verify: false
       minimum_version: TLS1.2
+...
