@@ -26,6 +26,7 @@ services:
       TZ: ${TZ}
     volumes:
       - ./config:/config
+      - ./data:/config/data  
     networks: [authelia]
     healthcheck:
       test: ["CMD", "wget", "-qO-", "http://127.0.0.1:9091/api/health"]
