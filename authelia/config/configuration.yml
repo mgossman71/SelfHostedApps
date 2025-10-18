@@ -5,7 +5,7 @@
 ###############################################################################
 
 theme: dark #light/dark
-jwt_secret: 1234567890abcdefghifjkl #any text or number you want to add here to create jwt Token
+jwt_secret: 9a1099c6d968fa1ef2b2f94be3018f2be0f068c7696dc9df19c1eb4d555c781b #any text or number you want to add here to create jwt Token. CREATE YOUR OWN
 
 default_redirection_url: https://google.com/ #where to redirect for a non-existent URL
 
@@ -26,7 +26,7 @@ log:
   level: debug
 
 totp:
-  issuer: yourdomain.com #your authelia top-level domain
+  issuer: gossman.cloud #your authelia top-level domain
   period: 30
   skew: 1
 
@@ -48,13 +48,13 @@ access_control:
   rules:
     ## bypass rule
     - domain: 
-        - "auth.yourdomain.com" #This should be your authentication URL
+        - "auth.gossman.cloud" #This should be your authentication URL
       policy: bypass
-    - domain: "yourdomain.com" #example domain to protect
+    - domain: "jarvis.gossman.cloud" #example domain to protect
       policy: one_factor
-    - domain: "sub1.yourdomain.com" #example subdomain to protect
+    - domain: "imch.gossman.cloud" #example subdomain to protect
       policy: one_factor
-    - domain: "sub2.yourdomain.com" #example subdomain to protect
+    - domain: "sub2.gossman.cloud" #example subdomain to protect
       policy: one_factor
     - domain: "*.yourdomain.com" #example to protect all subdomains under top-level domain
       policy: one_factor
