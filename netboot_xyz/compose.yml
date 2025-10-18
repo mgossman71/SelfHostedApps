@@ -1,19 +1,17 @@
 services:
   netbootxyz:
-    image: lscr.io/linuxserver/netbootxyz:latest
+    image: ghcr.io/netbootxyz/netbootxyz:latest
+    platform: linux/amd64
     container_name: netbootxyz
+    restart: unless-stopped
     environment:
-      - PUID=1000 #current user
-      - PGID=1000 #current group
-      - TZ=Etc/UTC
-      # - MENU_VERSION=1.9.9 #optional, sets menus version, unset uses latest
-      - PORT_RANGE=30000:30010 #optional
-      - SUBFOLDER=/ #optional
+      WEB_APP_PORT: "3000"      # web UI
+      NGINX_PORT: "80"          # serves mirrored assets
+      # MENU_VERSION: "2.0.84"  # optional pin (omit to track latest)
+    ports:
+      - "3000:3000"             # web UI
+      - "69:69/udp"             # TFTP
+      - "8080:80"               # local asset mirror
     volumes:
       - ./config:/config
-      - ./assets:/assets #optional
-    ports:
-      - 3000:3000
-      - 69:69/udp
-      - 8080:80 #optional
-    restart: unless-stopped
+      - ./assets:/assets
