@@ -1,0 +1,59 @@
+services:
+  # 1) Generate Guacamole's PostgreSQL schema into a named volume (runs once)
+  guac-db-schema:
+    image: guacamole/guacamole:1.5.5
+    user: 0:0 # write permission into the volume
+    restart: no
+    volumes:
+      - pginit_guac:/out
+    entrypoint:
+      - /bin/sh
+      - -c
+    command:
+      - /opt/guacamole/bin/initdb.sh --postgresql > /out/001-init.sql
+  # 2) Postgres reads that schema on first init
+  postgres:
+    image: postgres:16
+    restart: unless-stopped
+    depends_on:
+      guac-db-schema:
+        condition: service_completed_successfully
+    environment:
+      POSTGRES_DB: guacamole_db
+      POSTGRES_USER: guacamole_user
+      POSTGRES_PASSWORD: supersecret_db_pass
+    healthcheck:
+      test:
+        - CMD-SHELL
+        - pg_isready -U guacamole_user -d guacamole_db
+      interval: 5s
+      timeout: 5s
+      retries: 30
+    volumes:
+      - pgdata_guac:/var/lib/postgresql/data
+      - pginit_guac:/docker-entrypoint-initdb.d:ro
+  # 3) guacd proxy
+  guacd:
+    image: guacamole/guacd:1.5.5
+    restart: unless-stopped
+  # 4) Guacamole web
+  guacamole:
+    image: guacamole/guacamole:1.5.5
+    restart: unless-stopped
+    depends_on:
+      postgres:
+        condition: service_healthy
+      guacd:
+        condition: service_started
+    environment:
+      GUACD_HOSTNAME: guacd
+      POSTGRES_HOSTNAME: postgres
+      POSTGRES_DATABASE: guacamole_db
+      POSTGRES_USER: guacamole_user
+      POSTGRES_PASSWORD: supersecret_db_pass
+    ports:
+      - 8080:8080
+volumes:
+  pgdata_guac: null
+  pginit_guac: null
+networks: {}
