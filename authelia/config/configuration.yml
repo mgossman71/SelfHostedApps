@@ -4,19 +4,25 @@
 #                           Authelia Configuration                            #
 ###############################################################################
 
-theme: dark #light/dark
-jwt_secret: 9a1099c6d968fa1ef2b2f94be3018f2be0f068c7696dc9df19c1eb4d555c781b #any text or number you want to add here to create jwt Token. CREATE YOUR OWN
+theme: dark
 
-default_redirection_url: https://google.com/ #where to redirect for a non-existent URL
+# Use the newer location for the JWT secret used by password resets.
+identity_validation:
+  reset_password:
+    jwt_secret: 9a1099c6d968fa1ef2b2f94be3018f2be0f068c7696dc9df19c1eb4d555c781b
+
+# Keep redirects within your cookie scope to avoid warnings.
+default_redirection_url: https://auth.gossman.cloud/
 
 server:
-  host: 0.0.0.0
-  port: 9091
-  path: ""
-  read_buffer_size: 4096
-  write_buffer_size: 4096
-  enable_pprof: false
-  enable_expvars: false
+  # Replace deprecated host/port/path with address + endpoints/buffers.
+  address: tcp://0.0.0.0:9091/
+  endpoints:
+    enable_pprof: false
+    enable_expvars: false
+  buffers:
+    read: 4096
+    write: 4096
   disable_healthcheck: false
   tls:
     key: ""
@@ -26,15 +32,17 @@ log:
   level: debug
 
 totp:
-  issuer: gossman.cloud #your authelia top-level domain
+  issuer: gossman.cloud
   period: 30
   skew: 1
 
 authentication_backend:
-  disable_reset_password: false
+  # Replaces authentication_backend.disable_reset_password
+  password_reset:
+    disable: false
   refresh_interval: 5m
   file:
-    path: /config/users_database.yml #this is where your authorized users are stored
+    path: /config/users_database.yml
     password:
       algorithm: argon2id
       iterations: 1
@@ -46,44 +54,40 @@ authentication_backend:
 access_control:
   default_policy: deny
   rules:
-    ## bypass rule
-    - domain: 
-        - "auth.gossman.cloud" #This should be your authentication URL
+    - domain:
+        - "auth.gossman.cloud"
       policy: bypass
-    - domain: "jarvis.gossman.cloud" #example domain to protect
-      policy: one_factor
-    - domain: "imch.gossman.cloud" #example subdomain to protect
-      policy: one_factor
-    - domain: "sub2.gossman.cloud" #example subdomain to protect
-      policy: one_factor
-    # - domain: "*.yourdomain.com" #example to protect all subdomains under top-level domain
-    #   policy: one_factor
-      #add or remove additional subdomains as necessary. currenlty only supports ONE top-level domain
-      #any time you add a new subdomain, you will need to restart the Authelia container to recognize the new settings/rules
 
-## Based on recent comments on the video, this session information may not work and you may need to use the revised session information below.
-#session:
-#  name: authelia_session
-#  secret: unsecure_session_secret #any text or number you want to add here to create jwt Token
-#  expiration: 3600  # 1 hour
-#  inactivity: 300  # 5 minutes
-#  domain: yourdomain.com  # Should match whatever your root protected domain is
+    - domain: "jarvis.gossman.cloud"
+      policy: one_factor
+
+    - domain: "imch.gossman.cloud"
+      policy: one_factor
+
+    - domain: "sub2.gossman.cloud"
+      policy: one_factor
 
 session:
   name: authelia_session
-  domain: gossman.cloud
   same_site: lax
   secret: itsmysecret
   expiration: 1h
   inactivity: 5m
-  remember_me_duration: 1M
+  remember_me: true
+
+  # New multi-domain cookie configuration replaces the deprecated single 'domain' option.
+  cookies:
+    - domain: gossman.cloud
+      # Optional per-cookie override; global default_redirection_url already matches scope.
+      default_redirection_url: https://auth.gossman.cloud/
+
   redis:
     host: authelia-redis
     port: 6379
-    password: itsmysecret
+    password: itsmysecret        # must match REDIS_PASSWORD in your .env
     database_index: 0
     maximum_active_connections: 10
-    minimum_idle_connections: 0  
+    minimum_idle_connections: 0
 
 regulation:
   max_retries: 3
@@ -92,19 +96,20 @@ regulation:
 
 storage:
   local:
-    path: ./data/db.sqlite3 #this is your databse. You could use a mysql database if you wanted, but we're going to use this one.
-  encryption_key: ed428480d7b22d87a4fa540461263d6ab8e2495439672cbb316a40e7a55966d3  #you_must_generate_a_random_string_of_more_than_twenty_chars_and_configure_this #added Dec 5 2021
-  
+    # Inside the container; bind-mount host ./data -> /config/data in docker-compose.
+    path: /config/data/db.sqlite3
+  encryption_key: ed428480d7b22d87a4fa540461263d6ab8e2495439672cbb316a40e7a55966d3
+
 notifier:
-  disable_startup_check: true #true/false
+  disable_startup_check: true
   smtp:
-    username: youremail@gmail.com #your email address
-    password: Y0uRp@55W0rD! #your email password
-    host: smtp.gmail.com #email smtp server
-    port: 587 #email smtp port
+    # New consolidated address key replaces host/port.
+    address: submission://smtp.gmail.com:587
+    username: youremail@gmail.com
+    password: Y0uRp@55W0rD!
     sender: youremail@gmail.com
     identifier: localhost
-    subject: "[Authelia] {title}" #email subject
+    subject: "[Authelia] {title}"
     startup_check_address: youremail@gmail.com
     disable_require_tls: false
     disable_html_emails: false
