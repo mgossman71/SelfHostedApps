@@ -2,6 +2,9 @@
 
 set -e
 
+# Install needed tools
+apt install curl -y
+
 # Create and move to the ollama directory
 mkdir -p /code/ollama
 cd /code/ollama
