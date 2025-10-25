@@ -147,8 +147,6 @@ pages:
               - title: Proxmox Backup Server
                 url: https://10.0.0.19:8007/
                 allow-insecure: true
-              - title: TrueNAS
-                url: http://truenas.gossman.cloud/
               - title: Synology
                 url: http://10.0.0.241:5000/
           - type: monitor  
