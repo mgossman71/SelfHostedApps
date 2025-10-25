@@ -187,6 +187,17 @@ pages:
           - type: iframe
             source: http://10.0.0.104:8080/
             height: 900   # adjust to taste
+  - name: Beszel
+    slug: beszel
+    columns:
+      - size: full
+        widgets:
+          - type: iframe
+            source: http://10.0.0.54:8090/
+            height: 900   # adjust to taste
+
+
+
   - name: Shopping
     slug: shopping
     columns:
