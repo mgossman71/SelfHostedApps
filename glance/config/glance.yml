@@ -144,6 +144,10 @@ pages:
                 url: https://10.0.0.22:8006
                 allow-insecure: true
                 alt-status-codes: [200, 401, 403]
+              - title: PVE4
+                url: https://10.0.0.66:8006
+                allow-insecure: true
+                alt-status-codes: [200, 401, 403]
               - title: Proxmox Backup Server
                 url: https://10.0.0.19:8007/
                 allow-insecure: true
