@@ -118,7 +118,12 @@ pages:
                 </li>
               {{ end }}
               </ul>     
-
+          - type: monitor
+            cache: 30s
+            title: Observability Tools
+            sites:
+              - title: Beszel
+                url: http://10.0.0.54:8090/
       - size: small
         widgets:
           - type: monitor
