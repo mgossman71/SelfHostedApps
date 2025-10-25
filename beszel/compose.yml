@@ -1,0 +1,13 @@
+services:
+  beszel:
+    image: henrygd/beszel:latest
+    container_name: beszel
+    restart: unless-stopped
+    ports:
+      - 8090:8090
+    volumes:
+      - ./beszel_data:/beszel_data
+    # If you put Beszel behind a reverse proxy, uncomment this block and set your URL:
+    # environment:
+    #   APP_URL: "https://monitor.example.com"
+networks: {}
