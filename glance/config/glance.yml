@@ -124,6 +124,8 @@ pages:
             sites:
               - title: Beszel
                 url: http://10.0.0.54:8090/
+              - title: Dashy
+                url: http://10.0.0.104:8080/
       - size: small
         widgets:
           - type: monitor
@@ -168,8 +170,6 @@ pages:
                 url: http://10.0.0.239:8123/
               - title: immich
                 url: https://imch.gossman.cloud
-              - title: Dashy
-                url: http://10.0.0.104:8080/
       - size: small
         widgets:
           - type: monitor
