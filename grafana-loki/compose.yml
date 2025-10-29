@@ -1,12 +1,14 @@
-name: ${STACK_NAME:-loki-stack}
-
 services:
   loki:
     image: grafana/loki:3.1.1
     container_name: loki
-    command: ["-config.file=/etc/loki/loki-config.yml"]
+    command:
+      - -config.file=/etc/loki/loki-config.yml
+      - -config.expand-env=true              # <<< add this
     environment:
-      - TZ=${TZ}
+      - TZ=${TZ:-America/Chicago}
+      - LOKI_LOG_LEVEL=${LOKI_LOG_LEVEL:-info}      # <<< default if not in .env
+      - LOKI_RETENTION=${LOKI_RETENTION:-168h}      # <<< default 7d
     ports:
       - "${LOKI_LISTEN_ADDR:-0.0.0.0}:${LOKI_HTTP_PORT:-3100}:3100"
     user: "0:0"
@@ -18,15 +20,15 @@ services:
   promtail:
     image: grafana/promtail:3.1.1
     container_name: promtail
-    command: ["-config.file=/etc/promtail/promtail-config.yml"]
+    command:
+      - -config.file=/etc/promtail/promtail-config.yml
+      - -config.expand-env=true              # <<< add this so ${HOSTNAME} expands
     environment:
-      - TZ=${TZ}
-      - HOSTNAME=${HOSTNAME}
+      - TZ=${TZ:-America/Chicago}
+      - HOSTNAME=${HOSTNAME:-loki-host}      # <<< avoid “variable not set” warning
     volumes:
       - ./promtail/promtail-config.yml:/etc/promtail/promtail-config.yml:ro
       - ${PROMTAIL_POSITIONS_DIR:-./promtail/positions}:/positions
       - /var/log:/var/log:ro
       - /var/lib/docker/containers:/var/lib/docker/containers:ro
-      # If you want container auto-discovery later, also mount:
-      # - /var/run/docker.sock:/var/run/docker.sock:ro
     restart: unless-stopped
