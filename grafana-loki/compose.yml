@@ -1,0 +1,32 @@
+name: ${STACK_NAME:-loki-stack}
+
+services:
+  loki:
+    image: grafana/loki:3.1.1
+    container_name: loki
+    command: ["-config.file=/etc/loki/loki-config.yml"]
+    environment:
+      - TZ=${TZ}
+    ports:
+      - "${LOKI_LISTEN_ADDR:-0.0.0.0}:${LOKI_HTTP_PORT:-3100}:3100"
+    user: "0:0"
+    volumes:
+      - ./loki/loki-config.yml:/etc/loki/loki-config.yml:ro
+      - ${LOKI_DATA_DIR:-./loki/data}:/loki
+    restart: unless-stopped
+
+  promtail:
+    image: grafana/promtail:3.1.1
+    container_name: promtail
+    command: ["-config.file=/etc/promtail/promtail-config.yml"]
+    environment:
+      - TZ=${TZ}
+      - HOSTNAME=${HOSTNAME}
+    volumes:
+      - ./promtail/promtail-config.yml:/etc/promtail/promtail-config.yml:ro
+      - ${PROMTAIL_POSITIONS_DIR:-./promtail/positions}:/positions
+      - /var/log:/var/log:ro
+      - /var/lib/docker/containers:/var/lib/docker/containers:ro
+      # If you want container auto-discovery later, also mount:
+      # - /var/run/docker.sock:/var/run/docker.sock:ro
+    restart: unless-stopped
