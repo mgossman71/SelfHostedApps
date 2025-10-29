@@ -1,6 +1,6 @@
 server:
   http_listen_port: 3100
-  log_level: ${LOKI_LOG_LEVEL}
+  log_level: info
 
 common:
   instance_addr: 127.0.0.1
@@ -28,7 +28,6 @@ storage_config:
   boltdb_shipper:
     active_index_directory: /loki/index
     cache_location: /loki/boltdb-cache
-    shared_store: filesystem
   filesystem:
     directory: /loki/chunks
 
@@ -36,7 +35,7 @@ limits_config:
   ingestion_rate_mb: 16
   ingestion_burst_size_mb: 32
   max_global_streams_per_user: 5000
-  retention_period: ${LOKI_RETENTION}
+  retention_period: 168h
 
 ruler:
   storage:
