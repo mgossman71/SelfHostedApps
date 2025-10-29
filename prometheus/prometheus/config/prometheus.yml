@@ -15,6 +15,7 @@ scrape_configs:
           - "pve2:9100"   # pve2
           - "pve3:9100"   # pve3
           - "pve4:9100"   # pve4
+          - "fiserv0:9100"
 
 rule_files:
   - /etc/prometheus/alerts/*.yml
