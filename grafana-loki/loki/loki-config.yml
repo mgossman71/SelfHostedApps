@@ -16,6 +16,7 @@ common:
   ring:
     kvstore:
       store: inmemory
+    zone_awareness_enabled: false
 
 schema_config:
   configs:
