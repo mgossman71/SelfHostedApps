@@ -1,35 +1,59 @@
-# 1) Regenerate machine-id on first boot:
-sudo truncate -s 0 /etc/machine-id
-sudo rm -f /var/lib/dbus/machine-id || true
+# --- BASELINE: make sure required services exist & will start ---
+sudo apt-get update
+sudo apt-get install -y openssh-server qemu-guest-agent cloud-init
+sudo systemctl enable ssh qemu-guest-agent
+
+# --- FIX 1: don't leave a zero-byte machine-id (causes early-boot races) ---
+# Instead, remove it so systemd can regenerate on first boot.
+sudo rm -f /etc/machine-id /var/lib/dbus/machine-id
 sudo ln -s /etc/machine-id /var/lib/dbus/machine-id
 
-# 2) Remove old SSH host keys (new ones will be created on first boot)
-sudo rm -f /etc/ssh/ssh_host_*_key /etc/ssh/ssh_host_*_key.pub
+# --- FIX 2: guarantee SSH host keys exist before ssh.service starts on first boot ---
+# We add a one-shot unit that (re)creates keys and unmarks ssh if needed.
+sudo tee /etc/systemd/system/firstboot-regen-ssh.service >/dev/null <<'EOF'
+[Unit]
+Description=Regenerate machine-id (if missing) and SSH host keys on first boot
+ConditionFirstBoot=yes
+Before=ssh.service
+After=network-pre.target
 
-# 3) Reset cloud-init state (if you've installed it; recommended)
-# (Install it if you want per-clone userdata even for ISO builds)
-sudo apt-get install -y cloud-init
-sudo cloud-init clean --logs
+[Service]
+Type=oneshot
+ExecStart=/bin/bash -c '\
+  [ -s /etc/machine-id ] || systemd-machine-id-setup; \
+  rm -f /etc/ssh/ssh_host_*_key /etc/ssh/ssh_host_*_key.pub; \
+  /usr/bin/ssh-keygen -A; \
+  systemctl unmask ssh 2>/dev/null || true \
+'
 
-# 4) Clear DHCP leases (if NetworkManager is used, also clear its leases)
-sudo rm -f /var/lib/dhcp/*
+[Install]
+WantedBy=multi-user.target
+EOF
+sudo systemctl enable firstboot-regen-ssh.service
 
-# 5) Keep netplan generic (DHCP) — do NOT hardcode old interface MACs
-# Example minimal netplan (systemd-networkd):
-# /etc/netplan/01-netcfg.yaml
+# --- CLOUD-INIT: keep it fresh for per-clone customization ---
+sudo cloud-init clean --logs || true
+
+# --- DHCP leases: clear stale leases from the template ---
+sudo rm -f /var/lib/dhcp/* 2>/dev/null || true
+sudo rm -f /var/lib/NetworkManager/*lease* 2>/dev/null || true
+
+# --- (Optional) keep netplan generic (example only; ensure the NIC name fits your VM) ---
+# cat <<'YAML' | sudo tee /etc/netplan/01-netcfg.yaml
 # network:
 #   version: 2
 #   ethernets:
 #     ens18:
 #       dhcp4: true
-# (Or leave NetworkManager/systemd default and let DHCP work.)
+# YAML
+# sudo netplan generate
 
-# 6) Optional: cleanup caches/logs
+# --- housekeeping ---
 sudo apt-get autoremove -y
 sudo apt-get clean
 sudo journalctl --rotate
 sudo journalctl --vacuum-time=1s
 sudo rm -rf /tmp/* /var/tmp/*
 
-# 7) Power off
+# --- shutdown; convert to template in Proxmox afterward ---
 sudo poweroff
