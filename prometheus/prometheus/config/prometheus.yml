@@ -19,6 +19,7 @@ scrape_configs:
           - "lxc-plex:9100"
           - "px-u-dk-00:9100"
           - "px-u-dk-01:9100"
+          - "docker0:9100"
           - "armasrv0:9100"
           - "armasrv1:9100"
           - "armasrv2:9100"
