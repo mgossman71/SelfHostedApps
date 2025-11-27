@@ -24,6 +24,7 @@ scrape_configs:
           - "armasrv1:9100"
           - "armasrv2:9100"
           - "armasrv3:9100"
+          - "jellyfin:9100"
           
   - job_name: 'unifi-poller'
     scrape_interval: 30s
