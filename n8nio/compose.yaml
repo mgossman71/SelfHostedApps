@@ -3,6 +3,8 @@ services:
     image: n8nio/n8n:stable
     ports:
       - "5678:5678"
+    cap_add:
+      - NET_RAW
     environment:
       - GENERIC_TIMEZONE=America/Chicago
       - N8N_ENCRYPTION_KEY=CHANGE_ME_TO_A_LONG_RANDOM_STRING
@@ -22,8 +24,6 @@ services:
 
       # allow Execute Command / local triggers (disabled by default in v2)
       - NODES_EXCLUDE=[]
-      # optional: explicitly allowlist (not required if you set NODES_EXCLUDE=[])
-      # - NODES_INCLUDE=ExecuteCommand,LocalFileTrigger
     volumes:
       - n8n_data:/home/node/.n8n
     restart: unless-stopped
