@@ -1,18 +1,26 @@
 services:
   n8n:
     image: n8nio/n8n:stable
-    container_name: n8n
     ports:
-      - 5678:5678
+      - "5678:5678"
     environment:
       - GENERIC_TIMEZONE=America/Chicago
-      # generate a long random string and keep it the same forever
       - N8N_ENCRYPTION_KEY=CHANGE_ME_TO_A_LONG_RANDOM_STRING
       - N8N_LICENSE_ACTIVATION_KEY=3a9e21f8-ff48-4584-9662-5d2779052da1
+
+      # external URL (what your browser uses)
+      - N8N_HOST=n8n.gossman.cloud
+      - N8N_PROTOCOL=https
+      - N8N_EDITOR_BASE_URL=https://n8n.gossman.cloud
+      - WEBHOOK_URL=https://n8n.gossman.cloud
+
+      # live updates
       - N8N_PUSH_BACKEND=websocket
+
+      # reverse proxy in front
+      - N8N_PROXY_HOPS=1
     volumes:
       - n8n_data:/home/node/.n8n
     restart: unless-stopped
 volumes:
-  n8n_data: null
-networks: {}
+  n8n_data:
