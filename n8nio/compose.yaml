@@ -19,8 +19,14 @@ services:
 
       # reverse proxy in front
       - N8N_PROXY_HOPS=1
+
+      # allow Execute Command / local triggers (disabled by default in v2)
+      - NODES_EXCLUDE=[]
+      # optional: explicitly allowlist (not required if you set NODES_EXCLUDE=[])
+      # - NODES_INCLUDE=ExecuteCommand,LocalFileTrigger
     volumes:
       - n8n_data:/home/node/.n8n
     restart: unless-stopped
+
 volumes:
   n8n_data:
