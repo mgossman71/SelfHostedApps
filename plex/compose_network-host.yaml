@@ -1,0 +1,26 @@
+# compose.yaml
+services:
+  plex:
+    image: plexinc/pms-docker:latest
+    container_name: plex
+    restart: unless-stopped
+
+    # Best for Apple TV / local discovery. If you can’t use host networking, see the bridge alternative below.
+    network_mode: host
+
+    environment:
+      - TZ=America/Chicago
+      - PUID=1000
+      - PGID=1000
+      # Optional: lets you pre-claim the server on first boot
+      # - PLEX_CLAIM=claim-xxxxxxxxxxxxxxxxxxxx
+
+      # Optional (often fixes "Indirect" / relay issues behind NAT/VLAN):
+      # - ADVERTISE_IP=http://10.0.0.235:32400/
+
+    volumes:
+      - ./config:/config
+      - ./transcode:/transcode
+      # Media mounts (edit to your paths)
+      - /mnt/SharedVol/Movies:/data/movies:ro
+      - /mnt/SharedVol/TV-Shows:/data/tv:ro
