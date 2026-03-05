@@ -1,0 +1,42 @@
+# compose.yaml (bridge mode)
+services:
+  plex:
+    image: plexinc/pms-docker:latest
+    container_name: plex
+    restart: unless-stopped
+
+    network_mode: bridge
+
+    ports:
+      # Plex Web / clients
+      - "32400:32400/tcp"
+
+      # DLNA (optional; remove if you don't use DLNA)
+      - "1900:1900/udp"
+      - "32469:32469/tcp"
+
+      # GDM discovery (lets clients like Apple TV find Plex on LAN)
+      - "32410:32410/udp"
+      - "32412:32412/udp"
+      - "32413:32413/udp"
+      - "32414:32414/udp"
+
+      # Companion / Chromecast-style control (optional; keep if you use it)
+      - "8324:8324/tcp"
+
+    environment:
+      - TZ=America/Chicago
+      - PUID=1000
+      - PGID=1000
+
+      # Helps clients connect directly (avoid Indirect/Relay). Set to the HOST/VM IP running Docker.
+      - ADVERTISE_IP=http://10.0.0.235:32400/
+
+      # Optional: claim on first run
+      # - PLEX_CLAIM=claim-xxxxxxxxxxxxxxxxxxxx
+
+    volumes:
+      - ./config:/config
+      - ./transcode:/transcode
+      - /mnt/SharedVol/Movies:/data/movies:ro
+      - /mnt/SharedVol/TV-Shows:/data/tv:ro
