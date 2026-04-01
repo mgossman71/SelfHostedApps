@@ -1,6 +1,6 @@
 services:
   litellm:
-    image: ghcr.io/berriai/litellm:main-stable
+    image: docker.litellm.ai/berriai/litellm:main-stable
     container_name: litellm
     restart: unless-stopped
     depends_on:
@@ -10,13 +10,13 @@ services:
       - "4000:4000"
     env_file:
       - ./.env
+    environment:
+      DATABASE_URL: postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@db:5432/${POSTGRES_DB}
+      STORE_MODEL_IN_DB: "True"
     volumes:
       - ./config.yaml:/app/config.yaml:ro
       - ./litellm-data:/var/lib/litellm
-    command:
-      - "--config=/app/config.yaml"
-      - "--port=4000"
-      - "--num_workers=1"
+    command: ["--config", "/app/config.yaml", "--port", "4000"]
     healthcheck:
       test: ["CMD-SHELL", "python -c \"import urllib.request; urllib.request.urlopen('http://127.0.0.1:4000/health/liveliness', timeout=5)\" || exit 1"]
       interval: 30s
