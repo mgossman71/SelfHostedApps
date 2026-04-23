@@ -10,4 +10,5 @@ services:
       - ./data:/var/cache/searxng
     environment:
       - BASE_URL=http://localhost:8080/
+      - SEARXNG_FORMATS=html,json
 networks: {}
